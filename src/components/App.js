@@ -12,7 +12,7 @@ class App extends React.Component {
     componentDidMount() {
         fetch("https://ejl-tower-server.herokuapp.com/games")
             .then(response => response.json())
-            .then(games => this.setState({games: games.game}));
+            .then(games => this.setState({details: games.game}));
     };
 
 
@@ -22,6 +22,7 @@ class App extends React.Component {
             <div>
                 <Header/>
                 <main>
+                    <img className="ui small image" src="assets/maps/middle_la_noscea.png"/>
                 </main>
                 <Footer/>
             </div>
