@@ -6,7 +6,6 @@ class Header extends React.Component {
             <div className="Header">
                 <h1>Atlas Eorzea</h1>
                 <div className="ui search">
-                    <input className="prompt" type="text" placeholder="Search"/>
                 </div>
             </div>
         );

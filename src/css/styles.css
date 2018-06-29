@@ -1,11 +1,31 @@
 body {
     padding: 0px;
     margin: 0px;
+    background: #22466B;
 }
 
 .Header {
     display: flex;
     justify-content: space-between;
-    background: darkred;
+    background: #22466B;
 }
 
+.Footer {
+    display: flex;
+    justify-content: space-between;
+    background: #22466B;
+    padding: .5vw;
+}
+
+.main {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+canvas {
+    height: 100%;
+    width: 100%;
+}

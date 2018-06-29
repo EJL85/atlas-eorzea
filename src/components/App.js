@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import Tabs from './Tabs';
+import Menu from './Menu';
 
 class App extends React.Component {
 
@@ -8,21 +10,22 @@ class App extends React.Component {
         details: {}
     };
 
-
     componentDidMount() {
-        fetch("https://ejl-tower-server.herokuapp.com/games")
+        fetch("https://ejl-cap-proto-back.herokuapp.com/")
             .then(response => response.json())
-            .then(games => this.setState({details: games.game}));
+            .then(details => this.setState({details}));
     };
-
-
 
     render() {
         return(
             <div>
                 <Header/>
-                <main>
-                    <img className="ui small image" src="assets/maps/middle_la_noscea.png"/>
+                <main className="main">
+                    <Menu/>
+                    {Object.keys(this.state.details).map(key => <Tabs
+                        key={key}
+                        test={this.state.details[key]}
+                    />)}
                 </main>
                 <Footer/>
             </div>
