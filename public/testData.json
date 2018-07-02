@@ -5,5 +5,13 @@
   "x": 21,
   "y": 19,
   "map": "northShroud"
+},
+{
+  "id": 2,
+  "name": "Dryad",
+  "map": "southShroud",
+  "levels": "15",
+  "x": 20,
+  "y": 20
 }
 ]

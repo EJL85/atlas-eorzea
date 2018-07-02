@@ -11,13 +11,30 @@ class Canvas extends React.Component {
             ctx.canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
             ctx.font = "40px Courier";
-            ctx.fillText(this.props.text, 300, 75);
+            ctx.fillText(this.props.text, 50, 50);
+            ctx.fillText("Level: " + this.props.levels, 50, 100);
+
+            let x = this.props.x;
+            let y = this.props.y;
+            console.log("x: " + x);
+            console.log("y: " + y);
+
+            ctx.globalAlpha = 0.25;
+            ctx.beginPath();
+            ctx.arc(x + 585, y + 565, 25, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#003300';
+            ctx.stroke();
+
+
         }
     }
 
     render() {
 
-
+        console.log(this.props);
 
         return(
             <div>

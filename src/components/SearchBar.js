@@ -14,7 +14,10 @@ const languages = [
     {
         id: 2,
         name: 'Dryad',
-        map: 'northShroud'
+        map: 'southShroud',
+        levels: '15',
+        x: 20,
+        y: 20
     },
     {
         id: 3,

@@ -8,33 +8,43 @@ class App extends React.Component {
     state={
         fullDB: {},
         currentMap: {},
-        currentMob: {}
+        currentMob: {},
+        currentX: {},
+        currentY: {},
+        currentLevels: {}
     };
 
     componentDidMount() {
         fetch("/testData.json")
             .then(response => response.json())
             .then(fullDB => this.setState({fullDB}))
-            .then(this.getMap);
     };
 
     testFunc = (data) => {
         console.log("I have been called!");
         console.table(data);
         console.log(data.suggestion.id);
-        console.log(data.suggestion.name);
-        console.log(data.suggestion.x);
-        console.log(data.suggestion.y);
-        console.log(data.suggestion.map);
+        let mob = data.suggestion.name;
+        let levels = data.suggestion.levels;
+        let x = data.suggestion.x;
+        let y = data.suggestion.y;
+        let map = this.getMap(data.suggestion.map);
+        this.setState({currentLevels: levels});
+        this.setState({currentMob: mob});
+        this.setState({currentX: x});
+        this.setState({currentY: y});
+        return map;
     };
 
-    getMap = () => {
-        switch (this.state.fullDB[0].map) {
+    getMap = (data) => {
+        switch (data) {
             case "northShroud":
-                let mapString = "assets/atlasEorzeaAssets/atlasEorzea/Eorzea/TheBlackShroud/NorthShroud/northShroud.PNG"
-                this.setState({currentMap: mapString});
-                console.log(mapString);
-                return mapString;
+                let northShroud = "assets/atlasEorzeaAssets/atlasEorzea/Eorzea/TheBlackShroud/NorthShroud/northShroud.PNG";
+                this.setState({currentMap: northShroud});
+                break;
+            case "southShroud":
+                let southShroud = "assets/atlasEorzeaAssets/atlasEorzea/Eorzea/TheBlackShroud/SouthShroud/southShroud.PNG"
+                this.setState({currentMap: southShroud});
                 break;
             default:
                 console.log("You shouldn't be seeing this");
@@ -47,7 +57,14 @@ class App extends React.Component {
             <div>
                 <Header testData="/testData.json" testFunc={this.testFunc}/>
                 <main className="main">
-                    <Canvas mob={() => this.state.currentMob} map={this.state.currentMap}/>
+                    <Canvas
+                        levels={this.state.currentLevels}
+                        text={this.state.currentMob}
+                        mob={this.state.currentMob}
+                        map={this.state.currentMap}
+                        x={this.state.currentX}
+                        y={this.state.currentY}
+                    />
                 </main>
                 <Footer/>
             </div>
