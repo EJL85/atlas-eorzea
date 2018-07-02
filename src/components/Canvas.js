@@ -22,7 +22,7 @@ class Canvas extends React.Component {
         return(
             <div>
                 <canvas ref="canvas" width={window.innerWidth} height={window.innerHeight}/>
-                <img ref="image" src={this.props.details} width={this.props.details.width} height={this.props.details.height} className="hidden" />
+                <img ref="image" src={this.props.map} alt="Map" width={this.props.map.width} height={this.props.map.height} className="hidden" />
             </div>
         )
     }

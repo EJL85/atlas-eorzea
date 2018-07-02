@@ -1,31 +1,53 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Tabs from './Tabs';
-import Menu from './Menu';
+import Canvas from './Canvas';
 
 class App extends React.Component {
 
     state={
-        details: {}
+        fullDB: {},
+        currentMap: {},
+        currentMob: {}
     };
 
     componentDidMount() {
-        fetch("https://ejl-cap-proto-back.herokuapp.com/")
+        fetch("/testData.json")
             .then(response => response.json())
-            .then(details => this.setState({details}));
+            .then(fullDB => this.setState({fullDB}))
+            .then(this.getMap);
     };
+
+    testFunc = (data) => {
+        console.log("I have been called!");
+        console.table(data);
+        console.log(data.suggestion.id);
+        console.log(data.suggestion.name);
+        console.log(data.suggestion.x);
+        console.log(data.suggestion.y);
+        console.log(data.suggestion.map);
+    };
+
+    getMap = () => {
+        switch (this.state.fullDB[0].map) {
+            case "northShroud":
+                let mapString = "assets/atlasEorzeaAssets/atlasEorzea/Eorzea/TheBlackShroud/NorthShroud/northShroud.PNG"
+                this.setState({currentMap: mapString});
+                console.log(mapString);
+                return mapString;
+                break;
+            default:
+                console.log("You shouldn't be seeing this");
+                break;
+        }
+    }
 
     render() {
         return(
             <div>
-                <Header/>
+                <Header testData="/testData.json" testFunc={this.testFunc}/>
                 <main className="main">
-                    <Menu/>
-                    {Object.keys(this.state.details).map(key => <Tabs
-                        key={key}
-                        test={this.state.details[key]}
-                    />)}
+                    <Canvas mob={() => this.state.currentMob} map={this.state.currentMap}/>
                 </main>
                 <Footer/>
             </div>
